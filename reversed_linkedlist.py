@@ -1,100 +1,101 @@
-from __future__ import print_function
-
 class Node(object):
-    """
-    Node implementation
-    """
-    def __init__(self, payload=None, next_node=None):
-        self.payload = payload
-        self.next_node = next_node
-
-    def get_payload(self):
-        return self.payload
-
-    def get_next(self):
-        return self.next_node
-
-    def has_next(self):
-        return bool(self.next_node)
-
-    def set_next(self, new_next):
-        self.next_node = new_next
-        return self.next_node
-
-    def __str__(self):
-        return self.payload
-
-class LinkedList(object):
-    """
-    Singly-linked list implementation
-    """
-    def __init__(self, head=None):
-        self.head = head
-
-    def get_head(self):
-        return self.head
-
-    def get_tail(self):
-        current = self.head
-        if not current or not current.has_next():
-            return current
-
-        while current.has_next():
-            current = current.get_next()
-        return current
-
-    def insert(self, payload, new_node=None):
-        if not new_node:
-            new_node = Node(payload)
-            
-        new_node.set_next(self.head)
-        self.head = new_node
-        return self
-
-    def append(self, payload, new_node=None):
-        if not new_node:
-            new_node = Node(payload)
-
-        self.get_tail().set_next(new_node)
-        return self
-
-    def size(self):
-        current = self.head
-        node_count = 0
-        while current:
-            node_count += 1
-            current = current.get_next()
-        return node_count
-
-    def reverse(self):
-        new_head = self.get_head()
-        new_list = LinkedList( head=Node( self.head.get_payload()) )
-        current = self.head.get_next()
-        while current:
-            new_list.insert(current)
-            current = current.get_next()
-        return new_list
+    def __init__(self, value):
+        self.payLoad = value
+        self.next = None
 
     def __repr__(self):
+        return "Node ({})".format(self.payLoad)
+
+class LinkList(object):
+    def __init__(self):
+        self.head = None
+
+    def add(self,data):
+        temp =  Node(data)
+        temp.next = self.head
+        self.head = temp
+
+    def search(self,f):
+       # If found the element return the corresponding Node
+        head = self.head
+        found = False
+        while head:
+            if head.payLoad == f:
+                found = head
+                break
+            head = head.next
+        return found
+
+    def __iter__(self):
+        # Remember, self is our UnorderedList.
+        # In order to get to the first Node, we must do
         current = self.head
-        line = ""
-        while current:
-            line += "({}) -> ".format(current.__str__())
-            current = current.get_next()
-        line += "None"
-        return line
-            
-if __name__ == '__main__':
-    my_list = LinkedList( Node(payload='D') ).insert('C').insert('B').insert('A').append('E')
-    print(my_list)
-    new_list = my_list.reverse()
-    print(new_list)
+        # and then, until we have reached the end:
+        while current is not None:
+            yield current
+            # in order to get from one Node to the next one:
+            current = current.next
 
+    def delete(self,d):
+        #d - payLoad to be deleted from the LinkList
+        #return True if successful otherwise False
 
+        prev, curr = None, self.head
+        found = False
+        while curr:
+            if curr.payLoad == d:
+                found = True
+                break
+            prev = curr
+            curr = curr.next
+        if found:
+            if prev is None: #first Node
+                self.head = curr.next #dereferencing pointer to curr
+            else:
+                prev.next = curr.next #value of prev would be there
+            return found
+        return found
 
+    def size(self):
+        cnt = 0
+        head = self.head
+        while head:
+            cnt +=1
+            head = head.next
+        return cnt
 
+    def reverse(self):
+        #linklist reversed
+        prev, nextNode = None, None
+        curr = self.head
+        while curr:
+            nextNode = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nextNode
+        self.head = prev
 
-        
-    
+    def peek(self):
+        #returns the top of the LinkList
+        return self.head.payLoad
 
-        
+    def __repr__(self):
+        return "LinkList ({})".format(self.head.payLoad)
+
+a = LinkList()
+a.add(10)
+a.add(20)
+a.add(30)
+#iterate over the list like a for loop
+for i in a:
+    print i
+print a.size()
+## 30 -> 20 -> 10
+assert a.peek() == 30
+a.reverse()
+## 10->20->30
+assert a.peek() == 10
+assert a.search(20) is not None
+assert a.search(50) == False
+assert a.delete(10) == True
+assert a.delete(10) == False
