@@ -20,16 +20,16 @@ function search(dst, arr) {
     return true;
 
   if (dst < arr[middlebound]) {
-	  console.log("%d is to the left...", dst);
-	  let lowerbound = 0;
-	  let upperbound = middlebound;
-	  return search(dst, arr.slice(lowerbound, upperbound));
-
-  } else if (dst > arr[middlebound-1]) {
-	  console.log("%d is to the right...", dst);
-	  let lowerbound = middlebound;
-	  let upperbound = arr.length;
-	  return search(dst, arr.slice(lowerbound, upperbound));
+    console.log("%d is to the left...", dst);
+    let lowerbound = 0;
+    let upperbound = middlebound;
+    return search(dst, arr.slice(lowerbound, upperbound));
+  } 
+  else if (dst > arr[middlebound-1]) {
+    console.log("%d is to the right...", dst);
+    let lowerbound = middlebound;
+    let upperbound = arr.length;
+    return search(dst, arr.slice(lowerbound, upperbound));
   }
 }
 
