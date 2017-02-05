@@ -63,6 +63,23 @@ class BST {
     }
   }
 
+  invert(root) {
+    var curr = root;
+
+    if (curr.left) {
+      if (curr.right) {
+        this.invert(curr.left);
+        this.invert(curr.right);
+      }
+    } 
+
+    var temp = curr.left;
+    curr.left = curr.right;
+    curr.right = temp;
+
+    return this;
+  }
+
   inOrder(root) {
     let curr = root;
 
@@ -116,9 +133,22 @@ for (var num of [10, 5, 3, 6, 20, 15, 40]) {
 console.log(bst.search(5));
 
 // Couple ways to traverse-print elements
+
 bst.inOrder(bst.root);
 bst.postOrder(bst.root);
 bst.preOrder(bst.root);
+
+var inverseBst = bst.invert(bst.root));
+/* 
+ * Invert tree to returns an inverted tree ->
+ *
+ *           (10)
+ *           /  \
+ *         (20) (5)
+ *         /    / \
+ *       (40)  (6) (3)  
+ *
+ */
 
 
 
