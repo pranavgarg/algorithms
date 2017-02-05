@@ -63,7 +63,8 @@ class Queue {
     }
 }
 
-// test out...
+// To test out, uncomment below ...
+/*
 var q = new Queue();
 console.log(q);
 
@@ -78,3 +79,7 @@ console.log(q);
 console.log(q.size());
 
 console.log(q.isEmpty());
+*/
+
+module.exports.Node = Node;
+module.exports.Queue = Queue;
