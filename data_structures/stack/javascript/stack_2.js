@@ -9,7 +9,7 @@
 // import { Node, Queue } from "queue";
 
 // ES5 --
-var queue = require('./queue');
+var queue = require('../../queue/javascript/queue');
 
 class Node {
   constructor(val) {
