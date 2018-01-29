@@ -1,10 +1,14 @@
 version: 2
 jobs:
-   build:
-     working_directory: ~/algorithms
-     docker:
-       - image: circleci/python:2.7.13
-     steps:
-       - run:
-         name: Running test
-         command: nosetests
+  build:
+    docker:
+      - image: "circleci/python:2.7.13"
+    steps:
+      - run:
+          command: |
+            wget https://bootstrap.pypa.io/get-pip.py
+            python get-pip.py
+            sudo pip install nose
+            cd ~/algorithms
+            nosetests
+    working_directory: ~/algorithms
