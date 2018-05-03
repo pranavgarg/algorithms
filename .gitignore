@@ -1,5 +1,7 @@
 *.pyc
 .DS_Store
+*~
+*#
 
 structures/.gitignore
 structures/LICENSE
