@@ -22,8 +22,15 @@ def quicksort(arr):
     elif (len(arr) == 2):
         if (arr[0] < arr[1]):
             return arr
-    L = partition(arr, 0, len(arr) - 1)
-    return quicksort(arr[:L]) + quicksort(arr[L:])
+
+    for i, _ in enumerate(arr):
+        if (i == len(arr) - 1):
+            break
+        if (arr[i] > arr[i+1]):
+            L = partition(arr, 0, len(arr) - 1)
+            return quicksort(arr[:L]) + quicksort(arr[L:])
+        
+    return arr
 
 if __name__ == "__main__":
     a = [4, 2, 6, 5, 3, 9]

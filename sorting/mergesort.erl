@@ -11,8 +11,6 @@ half(L) ->
 
 half([], _, {Acc1, Acc2}) ->
     {lists:reverse(Acc1), lists:reverse(Acc2)};
-half([X], _, {Acc1, Acc2}) -> 
-    {lists:reverse(Acc1), lists:reverse([X | Acc2])};
 half([H|T], {Cnt, Len}, {Acc1, Acc2}) -> 
     case Cnt >= (Len div 2) of
 	true -> half(T, {Cnt + 1, Len}, {Acc1, [H|Acc2]});
