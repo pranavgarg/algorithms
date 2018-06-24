@@ -3,10 +3,13 @@ jobs:
   build:
     docker:
       - image: "circleci/python:2.7.13"
+    machine:
+        pre:
+          - sudo -H pip install --upgrade virtualenv
     steps:
       - run:
           command: |
-            pip install nose --user
+            sudo pip install nose
             cd ~/algorithms
             nosetests
     working_directory: ~/algorithms
