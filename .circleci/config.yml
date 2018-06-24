@@ -8,7 +8,8 @@ jobs:
           command: |
             wget https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
-            sudo pip install nose
+            pip install --upgrade pip
+            pip install nose --user
             cd ~/algorithms
             nosetests
     working_directory: ~/algorithms
