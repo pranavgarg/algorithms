@@ -1,5 +1,17 @@
+# python
 *.pyc
+
+# erlang
+*.beam
+
+# ocaml
+*.native
+*.o
+
+# backup
 .DS_Store
+*~
+*#
 
 structures/.gitignore
 structures/LICENSE
